@@ -2,13 +2,7 @@
 
   <main class="main" role="main">
     
-    <header class="wrap">
-      <h1><?= $page->title()->html() ?></h1>
-      <div class="intro text">
-        <?= $page->year() ?>
-      </div>
-      <hr />
-    </header>
+
     
     <?= $page->text()->kirbytext() ?>
     

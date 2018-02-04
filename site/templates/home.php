@@ -1,5 +1,5 @@
 <?php snippet('header') ?>
-<!-- ^ this is where the menu/head stuff comes from -->
+
 
   <main class="main" role="main">
     

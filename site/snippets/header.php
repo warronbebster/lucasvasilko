@@ -10,6 +10,9 @@
 
   <?= css('assets/css/index.css') ?>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/barba.js/1.0.0/barba.min.js" type="text/javascript"></script>
+
+
 </head>
 <body>
 
@@ -24,3 +27,8 @@
 
     </div>
   </header>
+
+
+  <div id="barba-wrapper">
+    <div class="barba-container">
+      <!-- ^this opens the barba containers -->
