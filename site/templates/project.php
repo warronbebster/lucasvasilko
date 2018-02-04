@@ -10,23 +10,20 @@
       <hr />
     </header>
     
-    <div class="text wrap">
+    <?= $page->text()->kirbytext() ?>
+    
+    <div class="project" data-page="<?= $page->url() ?>" data-limit="<?= $limit ?>" >
       
-      <?= $page->text()->kirbytext() ?>
 
-      <?php
-      // Images for the "project" template are sortable. You
-      // can change the display by clicking the 'edit' button
-      // above the files list in the sidebar.
-      foreach($page->images()->sortBy('sort', 'asc') as $image): ?>
-        <figure>
-          <img src="<?= $image->url() ?>" alt="<?= $page->title()->html() ?>" />
-        </figure>
+      <?php foreach($images as $image): ?>
+        <?php snippet('image', compact('image')) ?>
       <?php endforeach ?>
       
     </div>
+
+    <button class="load-more">Load more</button>
     
-    <?php snippet('prevnext') ?>
+    <!-- <?php snippet('prevnext') ?> -->
 
   </main>
 

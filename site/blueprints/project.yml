@@ -2,6 +2,10 @@ title: Project
 
 files:
   sortable: true
+  fields:
+    caption:
+      label: Caption
+      type: textarea
 
 pages: false
 

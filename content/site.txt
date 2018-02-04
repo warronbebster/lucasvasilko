@@ -1,13 +1,13 @@
-Title: Kirby Starterkit
+Title: Lucas Vasilko
 
 ----
 
-Author: Bastian Allgeier GmbH
+Author: Barron Webster
 
 ----
 
-Description: This is Kirby's Starterkit.
+Description: Lucas Vasilko is an NYC-based photographer.
 
 ----
 
-Copyright: © 2009–(date: Year) (link: http://getkirby.com text: The Kirby Team)
+Copyright: 

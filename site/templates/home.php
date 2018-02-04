@@ -1,4 +1,5 @@
 <?php snippet('header') ?>
+<!-- ^ this is where the menu/head stuff comes from -->
 
   <main class="main" role="main">
     
@@ -18,8 +19,10 @@
       
       <div class="wrap wide">
         <h2>Latest Projects</h2>
-        <?php snippet('showcase', ['limit' => 3]) ?>
-        <p class="projects-section-more"><a href="<?= page('projects')->url() ?>" class="btn">show all projects &hellip;</a></p>
+
+        <?php snippet('showcase2', array('filter' => 'projects/places')) ?>
+
+        <!-- <p class="projects-section-more"><a href="<?= page('projects')->url() ?>" class="btn">show all projects &hellip;</a></p> -->
       </div>
       
     </section>
