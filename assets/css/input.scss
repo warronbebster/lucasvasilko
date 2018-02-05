@@ -10,6 +10,7 @@ $primary-color: #333;
 $background-color: #ffffff;
 $hover-color: #28B000;
 $focus-color: #123456;
+$font-size: 20px;
 
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;
@@ -57,32 +58,19 @@ p, ul, ol, figure, pre {
   /* Reset font-sizes and normalize margins */
   font-size: inherit;
   line-height: inherit;
-  margin: 0 0 1.5rem;
 }
 
 /* Links */
 a {
   color: $focus-color;
   text-decoration: none;
-  border-bottom: 2px solid #71efac;
+  border-bottom: 2px solid $focus-color;
 }
 
 a:hover, a:focus, a:active {
-  color: #560bed;
+  color: $hover-color;
 }
 
-/* -----  1.4 Images & Figures  --------------------------------------------- */
-
-img {
-  border-style: none;
-  width: 100%;
-  height: auto;
-}
-
-figcaption {
-  font-size: .75rem;
-  line-height: 1.5rem;
-}
 
 /* =====  2 Layout Helpers & Reusable Components  =========================== */
 
@@ -97,97 +85,6 @@ figcaption {
 
 /* -----  2.1 Kirbytext  ---------------------------------------------------- */
 
-.intro {
-  text-align: center;
-  font-weight: 500;
-  font-size: 1.125rem;
-  margin-bottom: 3rem;
-}
-
-h1 + .intro {
-  margin-top: -2.25rem;
-}
-
-.text h2, .text h3 {
-  margin-top: 3rem;
-}
-
-.text ul, .text ol {
-  margin-left: 1.5em;
-}
-
-.text ul {
-  list-style: none;
-}
-
-.text ul > li::before {
-  content: "–";
-  display: inline-block;
-  position: relative;
-  width: 1.25em;
-  margin-right: -1.25em;
-  left: -1.25em;
-  padding-left: .25em;
-}
-
-.text ol > li {
-  list-style: decimal;
-}
-
-.text pre, .text code {
-  background-color: #eafded;
-  font-family: Courier, monospace;
-  font-size: .75rem;
-}
-
-.text code {
-  margin: -.25em 0;
-  padding: .25em .15em;
-  position: relative;
-  bottom: .05em;
-}
-
-.text pre > code {
-  display: block;
-  margin: 0;
-  padding: .8em;
-  position: static;
-  bottom: auto;
-  overflow-x: auto;
-}
-
-@supports (-webkit-overflow-scrolling: touch) {
-  .text pre > code {
-    /* Enables smoother scrolling for code sections on
-       mobile (i.e. touch) devices. */
-    overflow-x: scroll;
-    -webkit-overflow-scrolling: touch;
-  }
-}
-
-.text kbd {
-  padding: 3px 7px;
-  margin: -3px 2px;
-  font-size: 75%;
-  line-height: 1;
-  background: #e9e9e9;
-  border-radius: 4px;
-  box-shadow: 0 2px 0 #c9c7d4;
-  font-family: Montserrat, Helvetica, Arial, sans-serif;
-  position: relative;
-  bottom: 2px;
-}
-
-.text blockquote {
-  font-family: Montserrat, Helvetica, Arial, sans-serif;
-  border-left: 2px solid #a8a5be;
-  padding: .75rem;
-  background: #fffffd;
-}
-
-.text blockquote :last-child {
-  margin-bottom: 0;
-}
 
 /* -----  2.2 Button  ------------------------------------------------------- */
 
@@ -203,9 +100,9 @@ h1 + .intro {
 }
 
 .btn:hover, .btn:focus {
-  background: #261e66;
-  border-color: #261e66;
-  color: #71efac;
+  background: $background-color;
+  border-color: $background-color;
+  color: $primary-color;
 }
 
 .btn:active {
@@ -215,60 +112,6 @@ h1 + .intro {
 
 /* -----  2.3 Grid & Layout  ------------------------------------------------ */
 
-.grid {
-  font-size: 0;
-}
-
-.grid.gutter-1 {
-  /* We don’t use the shorthand attribute `margin: …` here
-     to make vertical margin easily overridable by other
-     styles with a lower specifity. */
-  margin-left: -.375rem;
-  margin-right: -.375rem;
-}
-
-.grid.gutter-1 .column {
-  padding-left: .375rem;
-  padding-right: .375rem;
-}
-
-.column {
-  position: relative;
-  display: inline-block;
-  width: 100%;
-  font-size: 1rem;
-  vertical-align: top;
-}
-
-.wrap {
-  box-sizing: content-box;
-  margin: 0 auto;
-  padding-left: .75rem;
-  padding-right: .75rem;
-  max-width: 36rem;
-}
-
-.wrap.wide {
-  max-width: 48rem;
-}
-
-@media all and (min-width: 31.5em) {
-  .wrap:not(.wide) {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-}
-
-@media all and (min-width: 38.25em) {
-  .wrap {
-    padding-left: 3rem;
-    padding-right: 3rem;
-  }
-  .wrap.wide {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-  }
-}
 
 /* ----- 2.5 Projects Showcase ---------------------------------------------- */
 
@@ -278,18 +121,19 @@ h1 + .intro {
 html {
   background: $background-color;
   color: $primary-color;
-  font-family: $font-main
+  font-family: $font-main;
   /* Always show the vertical scrollbar to prevent `jumps`
      of page content after navigating from a very short page
      that does not scroll to a long pager */
-  overflow-y: scroll;
+  // overflow: scroll;
+  // -webkit-overflow-scrolling: touch;
   /* Setting this to `default` prevents the cursors from
      changing when hovering blocks of text or whitespace,
      which is less distracting */
   cursor: default;
   /* Neccessary for sticks footer. */
-  position: relative;
-  min-height: 100%;
+  // position: relative;
+  // min-height: 100%;
   /* Prevent adjustments of font size after orientation
      changes in IE and iOS. */
   -webkit-text-size-adjust: 100%;
@@ -309,51 +153,26 @@ html {
 
 body {
   /* space for sticky footer */
-  margin-bottom: 4.5rem;
 }
 
 /* ----- 3.1  Header  ------------------------------------------------------- */
 
 .header {
-  padding-top: 1.5rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: $background-color;
 }
 
-.branding {
-  text-align: center;
-  font-family: Montserrat, Helvetica, Arial, sans-serif;
-  font-weight: 700;
-  font-size: 1.5rem;
-  line-height: 1.95rem;
-  margin-bottom: .45rem;
-}
-
-.branding a {
-  border-bottom: 0;
-}
 
 @media all and (min-width: 56em) {
-  .header {
-    padding-top: 3rem;
-    padding-bottom: 1.5rem;
-  }
-  .branding {
-    line-height: 3rem;
-    margin-bottom: 0;
-    white-space: nowrap;
-    text-align: left;
-  }
-  .branding,
-  .navigation {
-    vertical-align: baseline;
-    width: 50%;
-  }
+
 }
 
 /* -----  3.2 Menu  --------------------------------------------------------- */
 
 .menu {
-  text-align: center;
-  font-weight: 500;
+
 }
 
 .menu-item {
@@ -382,75 +201,77 @@ body {
   }
 }
 
-/* -----  3.3 Sticky Footer  ------------------------------------------------ */
+/* -----  3.3 Footer  ------------------------------------------------ */
 
-@keyframes pulsing-heart {
-  0% {
-    transform: scale(1);
-  }
-  25% {
-    transform: scale(1.2);
-  }
-  50% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  padding: 1.5rem 0;
-  text-align: center;
-  font-size: .875rem;
-}
-
-.footer p {
-  margin-bottom: 0;
-}
-
-.footer a {
-  border-bottom: 0;
-}
-
-.footer .heart {
-  /* The heart character of Arial Unicode MS looks just 
-     surprisingly nice … */
-  font-family: "Arial Unicode MS", Arial, sans-serif;
-  display: inline-block;
-}
-
-.footer-madewithkirby a:hover .heart {
-  animation: pulsing-heart .6s linear infinite;
-}
-
-@media all and (min-width: 48em) {
-  .footer-copyright, .footer-madewithkirby {
-    display: inline;
-  }
-  .footer-copyright::after {
-    content: "—";
-    margin: 0 .2em;
-    color: #71efac;
-  }
-}
 
 /* -----  3.4 Main Content  ------------------------------------------------- */
 
 .main {
-  padding-top: 3rem;
-  padding-bottom: 1.5rem;
+  height: 100vh;
+  background-color: yellow;
+  overflow-y: hidden;
 }
 
 /* =====  4 Template-specific Components ==================================== */
 
+.project{
+  overflow-x: auto;
+  overflow-y: hidden;
+  height: 100%;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+
+.side_scroll{
+  display: inline-block;
+  vertical-align: top;
+  max-height: 100vh;
+
+}
+
+.images{
+  height: 100%;
+  display: inline-block;
+}
+
+.project_text{
+  p{
+    max-width: 400px;
+    white-space: normal;
+  }
+}
+
+
+
+.image_container{
+  height: 100%;
+  display: inline-block;
+  margin-left: 20px;
+
+  figure{
+    height: 100%;
+    img{
+      height: 100%;
+      width: auto;
+    }
+  }
+
+  figcaption{
+    position: absolute;
+    top:10px;
+    background-color: $background-color;
+  }
+}
+
+button{
+  padding: 40px;
+  font-size: $font-size;
+  display: inline-block;
+}
+
 /* -----  4.1 Homepage  ----------------------------------------------------- */
 
 .projects-section {
-  background: #eafded;
   margin-top: 3rem;
   padding-top: 2.25rem;
   padding-bottom: .75rem;

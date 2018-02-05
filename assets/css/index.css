@@ -1,55 +1,186 @@
-/*
-Error: Invalid CSS after "  overflow-y": expected ";", was ": scroll;"
-        on line 285 of input.scss
+@charset "UTF-8";
+/* =====  1 Global Rules & Definitions  ===================================== */
+/* -----  1.1 Font Definitions  --------------------------------------------- */
+/* -----  1.2 Reset & Normalization  ---------------------------------------- */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  border: none;
+  box-sizing: border-box;
+  list-style: none;
+  font-family: Helvetica, sans-serif; }
 
-280:   color: $primary-color;
-281:   font-family: $font-main
-282:   /* Always show the vertical scrollbar to prevent `jumps`
-283:      of page content after navigating from a very short page
-284:      that does not scroll to a long pager *\/
-285:   overflow-y: scroll;
-286:   /* Setting this to `default` prevents the cursors from
-287:      changing when hovering blocks of text or whitespace,
-288:      which is less distracting *\/
-289:   cursor: default;
-290:   /* Neccessary for sticks footer. *\/
+article, aside, details, figcaption, figure,
+footer, header, main, menu, nav, section, summary {
+  /* Add correct display for IE 9- and some newer browsers */
+  display: block; }
 
-Backtrace:
-input.scss:285
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/scss/parser.rb:1278:in `expected'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/scss/parser.rb:1208:in `expected'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/scss/parser.rb:1203:in `tok!'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/scss/parser.rb:804:in `block in try_declaration'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/scss/parser.rb:1254:in `rethrow'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/scss/parser.rb:809:in `try_declaration'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/scss/parser.rb:732:in `declaration_or_ruleset'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/scss/parser.rb:697:in `block_child'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/scss/parser.rb:689:in `block_contents'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/scss/parser.rb:678:in `block'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/scss/parser.rb:670:in `ruleset'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/scss/parser.rb:696:in `block_child'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/scss/parser.rb:689:in `block_contents'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/scss/parser.rb:137:in `stylesheet'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/scss/parser.rb:41:in `parse'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/engine.rb:414:in `_to_tree'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/engine.rb:389:in `_render_with_sourcemap'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/engine.rb:307:in `render_with_sourcemap'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/plugin/compiler.rb:462:in `update_stylesheet'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/plugin/compiler.rb:209:in `each'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/plugin/compiler.rb:443:in `on_file_changed'
-/Library/Ruby/Gems/2.3.0/gems/sass-3.5.5/lib/sass/plugin/compiler.rb:320:in `block in watch'
-/Library/Ruby/Gems/2.3.0/gems/sass-listen-4.0.0/lib/sass-listen/event/config.rb:23:in `call'
-/Library/Ruby/Gems/2.3.0/gems/sass-listen-4.0.0/lib/sass-listen/event/processor.rb:115:in `_process_changes'
-/Library/Ruby/Gems/2.3.0/gems/sass-listen-4.0.0/lib/sass-listen/event/processor.rb:19:in `block in loop_for'
-/Library/Ruby/Gems/2.3.0/gems/sass-listen-4.0.0/lib/sass-listen/event/processor.rb:15:in `loop'
-/Library/Ruby/Gems/2.3.0/gems/sass-listen-4.0.0/lib/sass-listen/event/processor.rb:15:in `loop_for'
-/Library/Ruby/Gems/2.3.0/gems/sass-listen-4.0.0/lib/sass-listen/event/loop.rb:84:in `_wait_for_changes'
-/Library/Ruby/Gems/2.3.0/gems/sass-listen-4.0.0/lib/sass-listen/event/loop.rb:42:in `block in setup'
-/Library/Ruby/Gems/2.3.0/gems/sass-listen-4.0.0/lib/sass-listen/internals/thread_pool.rb:6:in `block in add'
-*/
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Error: Invalid CSS after \"  overflow-y\": expected \";\", was \": scroll;\"\A         on line 285 of input.scss\A \A 280:   color: $primary-color;\A 281:   font-family: $font-main\A 282:   /* Always show the vertical scrollbar to prevent `jumps`\A 283:      of page content after navigating from a very short page\A 284:      that does not scroll to a long pager */\A 285:   overflow-y: scroll;\A 286:   /* Setting this to `default` prevents the cursors from\A 287:      changing when hovering blocks of text or whitespace,\A 288:      which is less distracting */\A 289:   cursor: default;\A 290:   /* Neccessary for sticks footer. */"; }
+::-moz-selection {
+  background: #ffffff;
+  color: #261e66; }
+
+::selection {
+  background: #71efac;
+  color: #261e66; }
+
+/* -----  1.3 General Typography  ------------------------------------------- */
+h1, h2, h3, h4, h5, h6,
+p, ul, ol, figure, pre {
+  /* Reset font-sizes and normalize margins */
+  font-size: inherit;
+  line-height: inherit; }
+
+/* Links */
+a {
+  color: #123456;
+  text-decoration: none;
+  border-bottom: 2px solid #123456; }
+
+a:hover, a:focus, a:active {
+  color: #28B000; }
+
+/* =====  2 Layout Helpers & Reusable Components  =========================== */
+/* The Clearfix™: A classic … */
+.cf::after {
+  content: "";
+  display: block;
+  height: 0;
+  overflow: hidden;
+  clear: both; }
+
+/* -----  2.1 Kirbytext  ---------------------------------------------------- */
+/* -----  2.2 Button  ------------------------------------------------------- */
+.btn {
+  display: inline-block;
+  border: 2px solid;
+  padding: .6em .75em;
+  white-space: nowrap;
+  font-size: .75em;
+  font-family: Montserrat, Helvetica, Arial, sans-serif;
+  line-height: 1;
+  font-weight: 400; }
+
+.btn:hover, .btn:focus {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #333; }
+
+.btn:active {
+  background: #4509be;
+  border-color: #4509be; }
+
+/* -----  2.3 Grid & Layout  ------------------------------------------------ */
+/* ----- 2.5 Projects Showcase ---------------------------------------------- */
+/* =====  3 Site Layout  ==================================================== */
+html {
+  background: #ffffff;
+  color: #333;
+  font-family: Helvetica, sans-serif;
+  /* Always show the vertical scrollbar to prevent `jumps`
+     of page content after navigating from a very short page
+     that does not scroll to a long pager */
+  /* Setting this to `default` prevents the cursors from
+     changing when hovering blocks of text or whitespace,
+     which is less distracting */
+  cursor: default;
+  /* Neccessary for sticks footer. */
+  /* Prevent adjustments of font size after orientation
+     changes in IE and iOS. */
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  /* Highlight color for WebKit-bases touch devices. */
+  -webkit-tap-highlight-color: rgba(113, 239, 172, 0.5); }
+
+@media all and (max-width: 30em) {
+  html {
+    /* We decrease the font-size a little-bit for tiny
+       screens. Because this stylesheet uses relative units
+       everywhere, everything scales nicely. */
+    font-size: 1.25em; } }
+body {
+  /* space for sticky footer */ }
+
+/* ----- 3.1  Header  ------------------------------------------------------- */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #ffffff; }
+
+/* -----  3.2 Menu  --------------------------------------------------------- */
+.menu-item {
+  display: inline-block; }
+
+.menu-item:not(:last-child)::after {
+  content: "⁄";
+  display: inline-block;
+  font-size: .75em;
+  padding: 0 .2em;
+  color: #a8a5be; }
+
+.menu-item a {
+  border-bottom: 0; }
+
+.menu-item.is-active a {
+  border-bottom: 2px solid #71efac; }
+
+@media all and (min-width: 56em) {
+  .menu {
+    text-align: right; } }
+/* -----  3.3 Footer  ------------------------------------------------ */
+/* -----  3.4 Main Content  ------------------------------------------------- */
+.main {
+  height: 100vh;
+  background-color: yellow;
+  overflow-y: hidden; }
+
+/* =====  4 Template-specific Components ==================================== */
+.project {
+  overflow-x: auto;
+  overflow-y: hidden;
+  height: 100%;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch; }
+
+.side_scroll {
+  display: inline-block;
+  vertical-align: top;
+  max-height: 100vh; }
+
+.images {
+  height: 100%;
+  display: inline-block; }
+
+.project_text p {
+  max-width: 400px;
+  white-space: normal; }
+
+.image_container {
+  height: 100%;
+  display: inline-block;
+  margin-left: 20px; }
+  .image_container figure {
+    height: 100%; }
+    .image_container figure img {
+      height: 100%;
+      width: auto; }
+  .image_container figcaption {
+    position: absolute;
+    top: 10px;
+    background-color: #ffffff; }
+
+button {
+  padding: 40px;
+  font-size: 20px;
+  display: inline-block; }
+
+/* -----  4.1 Homepage  ----------------------------------------------------- */
+.projects-section {
+  margin-top: 3rem;
+  padding-top: 2.25rem;
+  padding-bottom: .75rem; }
+
+.projects-section-more {
+  text-align: center; }
+
+/*# sourceMappingURL=index.css.map */

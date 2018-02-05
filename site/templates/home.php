@@ -3,13 +3,6 @@
 
   <main class="main" role="main">
     
-    <header class="wrap">
-      <h1><?= $page->title()->html() ?></h1>
-      <div class="intro text">
-        <?= $page->intro()->kirbytext() ?>
-      </div>
-      <hr />
-    </header>
 
     <div class="text wrap">
       <?= $page->text()->kirbytext() ?>
@@ -17,7 +10,7 @@
   
     <section class="projects-section">
       
-      <div class="wrap wide">
+      <div>
         <h2>Latest Projects</h2>
 
         <?php snippet('showcase2', array('filter' => 'projects/places')) ?>

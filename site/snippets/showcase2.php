@@ -58,12 +58,7 @@ https://getkirby.com/docs/templates/snippets
           // can change the display by clicking the 'edit' button
           // above the files list in the sidebar.
           foreach($project->images()->sortBy('sort', 'asc') as $image): ?>
-            <figure>
-              <img src="<?= $image->url() ?>" alt="<?= $page->title()->html() ?>" />
-            </figure>
-            <div>
-              <h3><?= $image->caption()->html() ?></h3>
-            </div>
+            <?php snippet('image', compact('image')) ?>
           <?php endforeach ?>
 
         <!-- </a> -->

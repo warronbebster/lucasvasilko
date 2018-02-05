@@ -1,6 +1,7 @@
 $(function(){
 
-  var element = $('.project');
+  var element = $('.images');
+  var load_element = $('.load_more');
   var url_json     = element.data('page') + '.json';
   var limit   = parseInt(element.data('limit'));
   var offset  = limit;
@@ -12,31 +13,15 @@ $(function(){
   Barba.Dispatcher.on('newPageReady', function(currentStatus) { //when the new content is injected
     console.log(currentStatus);
     url_json = currentStatus.url + '.json'; //update url var to send to ajax
-
-
-
   });
 
   Barba.Dispatcher.on('transitionCompleted', function(currentStatus) { //when the Barba transition is totally done
 
-    element = $('.project');
-    
-    $('.load-more').on('click', function(e) {
-      console.log(url_json);
+    element = $('.images');
+    load_element = $('.load_more');
+    console.log(load_element);
+    offset = limit;
 
-      $.get(url_json, {limit: limit, offset: offset}, function(data) {
-
-        if(data.more === false) { //if there aren't any more images to load, delete button
-          $('.load-more').hide();
-        }
-
-        element.children().last().after(data.html);
-
-        offset += limit;
-
-      });
-
-    });
 
   });
 
@@ -90,15 +75,15 @@ $(function(){
       }
   });
 
-  /**
-   * Next step, you have to tell Barba to use the new Transition
-   */
-
   Barba.Pjax.getTransition = function() {
       /**
-       * Here you can use your own logic!
-       * For example you can use different Transition based on the current page or link...
-       */
+      * Next step, you have to tell Barba to use the new Transition
+      */
+
+      /**
+      * Here you can use your own logic!
+      * For example you can use different Transition based on the current page or link...
+      */
 
       return FadeTransition;
   };
@@ -107,23 +92,28 @@ $(function(){
 
 
 
-  $('.load-more').on('click', function(e) {
+  $('#barba-wrapper').on('click', '.load_more',  function(e) {
     console.log(url_json);
 
     $.get(url_json, {limit: limit, offset: offset}, function(data) {
 
       if(data.more === false) { //if there aren't any more images to load, delete button
-        $('.load-more').hide();
+        load_element.hide();
       }
 
-      element.children().last().after(data.html);
+      element.children().last().after(data.html); //adds the pictures
 
+      console.log('offset: ' + offset);
+      console.log('limit ' + limit);
       offset += limit;
 
     });
 
   });
 
+
+// something in this bit above isn't, like, resetting, when the ajax gets called
+// I think it's something about the offset and limit and the controller
 
 
 

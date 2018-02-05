@@ -3,19 +3,25 @@
   <main class="main" role="main">
     
 
-    
-    <?= $page->text()->kirbytext() ?>
-    
-    <div class="project" data-page="<?= $page->url() ?>" data-limit="<?= $limit ?>" >
-      
 
-      <?php foreach($images as $image): ?>
-        <?php snippet('image', compact('image')) ?>
-      <?php endforeach ?>
+    
+    <div class="project" >
+
+      <div class="project_text side_scroll">
+        <?= $page->text()->kirbytext() ?>
+      </div>
+
+      <div class="images side_scroll" data-page="<?= $page->url() ?>" data-limit="<?= $limit ?>">
+        <?php foreach($images as $image): ?>
+          <?php snippet('image', compact('image')) ?>
+        <?php endforeach ?>
+      </div>
       
+      <button class="load_more side_scroll">Load more</button>
+
     </div>
 
-    <button class="load-more">Load more</button>
+
     
     <!-- <?php snippet('prevnext') ?> -->
 
