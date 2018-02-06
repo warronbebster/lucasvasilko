@@ -7,9 +7,13 @@
     
     <div class="project" >
 
-      <div class="project_text side_scroll">
-        <?= $page->text()->kirbytext() ?>
-      </div>
+
+
+      <?php if (! $page->text()->empty()): ?>
+        <div class="project_text side_scroll">
+          <?= $page->text()->kirbytext() ?>
+        </div>
+      <?php endif ?>
 
       <div class="images side_scroll" data-page="<?= $page->url() ?>" data-limit="<?= $limit ?>">
         <?php foreach($images as $image): ?>
