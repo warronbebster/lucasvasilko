@@ -166,6 +166,7 @@ body {
   background-color: $background-color;
   border: 2px solid $primary-color;
   padding: $gridunit;
+  z-index: 20;
 }
 
 
