@@ -1,13 +1,31 @@
 $(function() {
 
     var element = $('.images');
-    var load_element = $('.load_more');
+    var scroll_element = $('.project');
     var url_json = element.data('page') + '.json';
     var limit = parseInt(element.data('limit'));
     var offset = limit;
-    // variables for AJAX
+    var callable = true; //can I call the ajax?
+    var on_mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent); 
+    var small_screen = window.innerWidth < 640; 
+    var about_visible = false;
+    var grid_active = false;
+    var scroll_width = 80;
 
-    Barba.Pjax.start();
+    
+    
+    // variables for AJAX
+    
+    $(window).resize(function() {
+        small_screen = window.innerWidth < 640; 
+    });
+
+    update_scroll_width(500);
+    console.log('elemnt withd start'+element.width());
+    console.log('scroll width start '+scroll_width);
+
+
+    Barba.Pjax.start(); 
     Barba.Prefetch.init(); //prefetch content on link hover
 
     Barba.Dispatcher.on('newPageReady', function(currentStatus) { //when the new content is injected
@@ -17,10 +35,20 @@ $(function() {
 
     Barba.Dispatcher.on('transitionCompleted', function(currentStatus) { //when the Barba transition is totally done
 
-        element = $('.images');
-        load_element = $('.load_more');
-        console.log(load_element);
-        offset = limit;
+      scroll_element = $('.project');
+      element = $('.images'); //reset variables to new elements that have loaded
+      offset = limit; //this resets the offset it grabs images from ajax
+      update_scroll_width();
+
+
+      scroll_element.scroll(function() { //this is what makes it work when you switch barbas
+        if (this.scrollLeft + (window.innerWidth*2) > scroll_width){
+          if(callable){ //if it hasn't been called for this scroll event yet
+            call_images(url_json);
+          }
+        }
+      });
+
 
     });
 
@@ -91,13 +119,87 @@ $(function() {
 
 
 
-    $('#barba-wrapper').on('click', '.load_more', function(e) {
-        console.log(url_json);
+    // $('#barba-wrapper').on('click', '.load_more', function(e) {
+    //     call_images(url_json);
+    // });
 
-        $.get(url_json, { limit: limit, offset: offset }, function(data) {
+
+    if(!on_mobile){ //if it's a computer
+      $('#barba-wrapper').on('mousewheel', '.project', function(e, delta) {
+        if ( Math.abs(e.deltaY) > Math.abs(e.deltaX) ){ //if you're scrolling more vertically than horizontally
+          // console.log("deltaY: " + e.deltaY);
+          this.scrollLeft -= (e.deltaY * 1);
+          e.preventDefault(); //prevent normal scroll
+        }
+      });
+    };
+
+
+
+
+    scroll_element.scroll(function() { //gotta get this to work when you switch to a new one
+      // console.log(element.width());
+      // console.log($('.image_container'));
+      console.log(scroll_element.scrollLeft() + (window.innerWidth*2));
+            console.log('element width ' + element.width());
+            console.log('scroll width ' + scroll_width);
+
+      if (this.scrollLeft + (window.innerWidth*2) > scroll_width){
+        //if you're close to the end of the scroll
+        if(callable){ //if it hasn't been called for this scroll event yet
+          call_images(url_json);
+        }
+      }
+    });
+
+
+
+
+    
+
+    if(small_screen){ //if small screen
+
+    } else { //if big screen
+      $('#name').mouseenter(
+        function(){
+          if(!about_visible){
+            $('.header').toggleClass('header_open');
+            about_visible = true;
+          }
+          
+        });
+      $('.header').mouseleave(
+        function(){
+          if(about_visible){
+            $('.header').toggleClass('header_open');
+            about_visible = false;
+          }
+        });
+    }
+
+    $('#night_mode').click(function(){
+        $('html').toggleClass('night_mode');
+        $('header').toggleClass('night_mode');
+    });
+    
+    $('#grid').click(function(){
+      call_images(url_json, 1500);
+      grid_active = !grid_active;
+      $('#image_holder').toggleClass('grid');
+    });
+
+
+
+    //NAMED FUNCTIONS
+
+    function call_images(jsonurl, delay = 500) {
+        console.log(jsonurl);
+        callable = false;
+
+        $.get(jsonurl, { limit: limit, offset: offset }, function(data) {
 
             if (data.more === false) { //if there aren't any more images to load, delete button
-                load_element.hide();
+                // load_element.hide();
             }
 
             element.children().last().after(data.html); //adds the pictures
@@ -105,38 +207,45 @@ $(function() {
             console.log('offset: ' + offset);
             console.log('limit ' + limit);
             offset += limit;
+            console.log(delay);
+            update_scroll_width(delay);
+            
         });
-    });
+    };
 
+    function update_scroll_width(delay){
+      setTimeout(function(){  //wait for a sec for the images to settle
+        scroll_width = 80; //start with the padding
 
+        if(grid_active){
+          //every 4 images
+          var test = 0;
+          for (var i = 0; i < $('.image_container').length; i++) {
+            var test_this_width = $('.image_container')[i].offsetWidth;
 
-    // $('.project').mousewheel(function(e, delta) {
-    //     if ( Math.abs(e.deltaY) > Math.abs(e.deltaX) ){
-    //       console.log("deltaY: " + e.deltaY);
-    //       this.scrollLeft -= (e.deltaY * 1);
+            if ( test_this_width > test){
+              test = test_this_width;
+            }
 
-    //       e.preventDefault();
-    //     }
-    // });
-
-    $('#barba-wrapper').on('mousewheel', '.project', function(e, delta) {
-        if ( Math.abs(e.deltaY) > Math.abs(e.deltaX) ){
-          console.log("deltaY: " + e.deltaY);
-          this.scrollLeft -= (e.deltaY * 1);
-
-          e.preventDefault();
+            if(i%4 == 0){
+              console.log(test);
+              scroll_width += test;
+              test = 0;
+            }
+            
+          }
+        }else{
+          for (var i = 0; i < $('.image_container').length; i++) {
+            scroll_width += $('.image_container')[i].offsetWidth;
+          }
         }
-    });
+        callable = true;
+      }, delay);
+    }
 
 
 
-
-
-
-    // something in this bit above isn't, like, resetting, when the ajax gets called
-    // I think it's something about the offset and limit and the controller
-
-
-
-
+//end of document ready
 });
+
+

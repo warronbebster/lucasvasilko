@@ -16,16 +16,19 @@
 </head>
 <body>
 
-  <header class="header wrap wide" role="banner">
-    <div class="grid">
+  <header class="header" role="banner">
 
-      <div class="branding column">
+      <div class="menu_element" id="name">
         <a href="<?= url() ?>" rel="home"><?= $site->title()->html() ?></a>
       </div>
 
       <?php snippet('menu2') ?>
 
-    </div>
+      <div class="menu_element" id="grid"><a>G</a></div>
+      <div class="menu_element cf" id="night_mode"><a>B</a></div>
+
+      <div id="about"><?= $site->description()->kirbytext() ?></div>
+
   </header>
 
 

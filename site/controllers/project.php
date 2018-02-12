@@ -25,7 +25,7 @@ return function($site, $pages, $page) {
   } else {
 
     $offset   = 0;
-    $limit    = 3;
+    $limit    = 16;
     $images = $images->limit($limit);
 
   }
