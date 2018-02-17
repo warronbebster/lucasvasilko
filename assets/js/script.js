@@ -18,6 +18,8 @@ $(function() {
     
     $(window).resize(function() {
         small_screen = window.innerWidth < 640; 
+        // $('img').css('height', '100%');
+        // console.log('resized!');
     });
 
     update_scroll_width(500);
@@ -185,6 +187,7 @@ $(function() {
     $('#grid').click(function(){
       call_images(url_json, 1500);
       grid_active = !grid_active;
+      $('#image_holder').toggleClass('flexy');
       $('#image_holder').toggleClass('grid');
     });
 

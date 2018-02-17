@@ -5,7 +5,7 @@
 
 /* =====  1 Global Rules & Definitions  ===================================== */
 
-$font-main: 'Roobert TRIAL', 'Untitled Sans', Helvetica, sans-serif;
+$font-main:  'Untitled Sans', Helvetica, sans-serif;
 $primary-color: #000000;
 $background-color: #ffffff;
 $hover-color: #AA9CAB;
@@ -35,7 +35,8 @@ $gridunit: 20px;
   list-style: none;
   font-family: $font-main;
   font-size: $font-size;
-  font-weight: 300;
+  font-weight: 400;
+  letter-spacing: -.5px;
 }
 
 article, aside, details, figcaption, figure,
@@ -267,13 +268,6 @@ body {
 
 }
 
-.images{
-  height: 100%;
-  display: inline-block;
-}
-
-
-
 .project_text{
   p{
     max-width: 400px;
@@ -281,8 +275,12 @@ body {
   }
 }
 
-#image_holder{
-  display: flex; 
+.images{
+  // display: flex; 
+  display: inline-block;
+  flex-wrap: nowrap ;
+  height: 100%;
+  // display: inline-block;
   //this fucks with the scroll measure stuff - but if scrolling is gonna work with the grid, gotta make it work
   //probably with some sort of special measure thing
   // flex-direction: row;
@@ -293,18 +291,29 @@ br{
 }
 
 .image_container{
-  height: 100%;
+
   display: inline-block;
+
+  // -webkit-box-flex: 1;
+  // -moz-box-flex: 1;
+  // box-flex: 1;
+  // -webkit-flex: 1 1 auto;
+  // flex: 1 1 auto; 
+  height:100%;
+
+
   font-size: 0;
-  padding-right: $gridunit*8;
-  transition: all .7s cubic-bezier(0.40, 0.06, 0.19, 0.95);
+  padding-right: $gridunit*4;
+  transition: height .7s cubic-bezier(0.40, 0.06, 0.19, 0.95), width .7s cubic-bezier(0.40, 0.06, 0.19, 0.95);
 
   figure{
     height: 100%;
-    img{
+  }
+
+  img{
       height: 100%;
+      max-width: 100%;
       width: auto;
-    }
   }
 
   figcaption{
@@ -318,17 +327,40 @@ br{
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
+  // justify-content: center;
+  align-items: center;
 
   .image_container{
-    height: 25%;
-    padding-right: $gridunit;
+    height: 25%; //pivoting this on or off might do the trick, and allow for animation...
+    // margin-right: $gridunit;
+    flex-grow:0;
     // display: inline-block;
     // clear: left;
-    figure{
+    &:nth-of-type(4n+0){
+      padding-top: $gridunit/2;
+    }
+    &:nth-of-type(4n+1){
+      padding-bottom: $gridunit/2;
+    }
+    &:nth-of-type(4n+2){
+      padding-bottom: $gridunit/2;
+      padding-top: $gridunit/2;
+    }
+    &:nth-of-type(4n+3){
+      padding-bottom: $gridunit/2;
+      padding-top: $gridunit/2;
+    }
 
+    figure{
+      img{
+        margin: 0 auto;
+        flex: 0 1 auto;
+      }
+     
     }
     
   }
+
   br{
     // display: inline-block;
     &:nth-child(4n+0) { 
