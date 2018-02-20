@@ -13,6 +13,13 @@ $focus-color: #000000;
 $font-size: 20px;
 $gridunit: 20px;
 
+@mixin box-shadow($horiz, $vert, $blur, $spread, $color) {
+  -webkit-box-shadow: $horiz $vert $blur $spread $color;
+     -moz-box-shadow: $horiz $vert $blur $spread $color;
+          box-shadow: $horiz $vert $blur $spread $color;
+}
+
+
 @mixin border-radius($radius) {
   -webkit-border-radius: $radius;
      -moz-border-radius: $radius;
@@ -118,7 +125,18 @@ html {
 .night_mode{
   background-color: $primary-color;
   color: $background-color;
-  transition: all .7s cubic-bezier(0.40, 0.06, 0.19, 0.95);
+  // transition: all .7s cubic-bezier(0.40, 0.06, 0.19, 0.95);
+  svg{
+    fill:$background-color;
+  }
+  #light_svg{
+    -moz-transform: scaleY(-1);
+    -o-transform: scaleY(-1);
+    -webkit-transform: scaleY(-1);
+    transform: scaleY(-1);
+    filter: FlipV;
+    -ms-filter: "FlipV";
+  }
 }
 
 body {
@@ -175,6 +193,20 @@ body {
     cursor: pointer;
   }
 }
+
+
+  svg{
+    height: 26px;
+    width: auto;
+    transition: fill .7s cubic-bezier(0.40, 0.06, 0.19, 0.95), opacity .7s cubic-bezier(0.40, 0.06, 0.19, 0.95);
+    &:hover{
+      opacity: .6;
+    }
+  }
+
+  .displaynone{
+    display: none;
+  }
 
 .header_open{
   max-height: 500px;
@@ -263,8 +295,10 @@ body {
   display: inline-block;
   vertical-align: top;
   max-height: 100vh;
-  padding: $gridunit*4 0 $gridunit*4 $gridunit*4;
+  padding: $gridunit*4;
   width:auto;
+  // flex-wrap: nowrap ;
+  height: 100%;
 
 }
 
@@ -275,16 +309,6 @@ body {
   }
 }
 
-.images{
-  // display: flex; 
-  display: inline-block;
-  flex-wrap: nowrap ;
-  height: 100%;
-  // display: inline-block;
-  //this fucks with the scroll measure stuff - but if scrolling is gonna work with the grid, gotta make it work
-  //probably with some sort of special measure thing
-  // flex-direction: row;
-}
 
 br{
   display: none;
@@ -323,19 +347,40 @@ br{
   }
 }
 
+#measure{
+  display: inline;
+  background-color: red;
+  position: absolute;
+}
+
+//GRID GRID GRID GRID GRID GRID GRID GRID GRID
+
 .grid{
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+  // flex-direction: column;
+  // flex-wrap: wrap;
   // justify-content: center;
-  align-items: center;
+  // align-items: center;
+  // height: 100vh;
+  display: grid;
+  grid-gap: 0;
+  grid-template-columns: repeat( 300px);
+  grid-template-rows: 25% 25% 25% 25%;
+  grid-auto-flow: column;
+   align-content: space-between;
+     justify-items: center;
+  // grid-auto-columns: 60px;
 
   .image_container{
-    height: 25%; //pivoting this on or off might do the trick, and allow for animation...
+    padding-right: $gridunit*4;
+    min-width: 30vh;
+    margin-right: $gridunit;
+
+    // height: 25%; //pivoting this on or off might do the trick, and allow for animation...
     // margin-right: $gridunit;
-    flex-grow:0;
+    // flex-grow:0;
     // display: inline-block;
     // clear: left;
+
     &:nth-of-type(4n+0){
       padding-top: $gridunit/2;
     }
@@ -352,21 +397,61 @@ br{
     }
 
     figure{
+      object-fit: contain;
+      background: transparent;
       img{
         margin: 0 auto;
-        flex: 0 1 auto;
+        min-height: 100%;
+        max-height: (calc(100vh - ($gridunit*8))) / 4;
+        width: auto;
+        object-fit: contain;
+        display:block;
+        margin:auto;
+        // flex: 0 1 auto;
+        &:hover{
+          cursor: zoom-in;
+        }
+
       }
-     
     }
-    
+
+    //LIGHTBOX LIGHTBOX LIGHTBOX LIGHTBOX LIGHTBOX LIGHTBOX LIGHTBOX LIGHTBOX LIGHTBOX
+
+    .lightbox{
+      position: fixed;
+      z-index: 2;
+      // pointer-events: none;
+
+      margin: 0 auto;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(255,255,255,.85);
+      // transition: background-color .7s cubic-bezier(0.40, 0.06, 0.19, 0.95);
+
+      &.night_mode{
+        background-color: rgba(0,0,0,.85);
+      }
+      img{
+        max-height: calc(100vh - 80px);
+        // max-width: calc(100vw - 80px);
+        padding: $gridunit*4;
+        &:hover{
+          cursor: zoom-out;
+        }
+      }
+    }
+
+//end of grid styles
   }
 
-  br{
-    // display: inline-block;
-    &:nth-child(4n+0) { 
-     display: none;
-    }
-  }
+  // br{
+  //   // display: inline-block;
+  //   &:nth-child(4n+0) { 
+  //    display: none;
+  //   }
+  // }
 
 }
 

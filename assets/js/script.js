@@ -10,7 +10,11 @@ $(function() {
     var small_screen = window.innerWidth < 640; 
     var about_visible = false;
     var grid_active = false;
+    var lightbox_active = false;
+    var in_lightbox;
     var scroll_width = 80;
+    var img_in_grid = $('img');
+
 
     
     
@@ -37,20 +41,7 @@ $(function() {
 
     Barba.Dispatcher.on('transitionCompleted', function(currentStatus) { //when the Barba transition is totally done
 
-      scroll_element = $('.project');
-      element = $('.images'); //reset variables to new elements that have loaded
-      offset = limit; //this resets the offset it grabs images from ajax
-      update_scroll_width();
-
-
-      scroll_element.scroll(function() { //this is what makes it work when you switch barbas
-        if (this.scrollLeft + (window.innerWidth*2) > scroll_width){
-          if(callable){ //if it hasn't been called for this scroll event yet
-            call_images(url_json);
-          }
-        }
-      });
-
+      reload_functions();
 
     });
 
@@ -142,8 +133,8 @@ $(function() {
     scroll_element.scroll(function() { //gotta get this to work when you switch to a new one
       // console.log(element.width());
       // console.log($('.image_container'));
-      console.log(scroll_element.scrollLeft() + (window.innerWidth*2));
-            console.log('element width ' + element.width());
+      console.log(scroll_element.scrollLeft() + (window.innerWidth*1.5));
+            // console.log('element width ' + element.width());
             console.log('scroll width ' + scroll_width);
 
       if (this.scrollLeft + (window.innerWidth*2) > scroll_width){
@@ -182,13 +173,42 @@ $(function() {
     $('#night_mode').click(function(){
         $('html').toggleClass('night_mode');
         $('header').toggleClass('night_mode');
+        $('figure').toggleClass('night_mode');
     });
     
     $('#grid').click(function(){
       call_images(url_json, 1500);
       grid_active = !grid_active;
-      $('#image_holder').toggleClass('flexy');
+      // $('#image_holder').toggleClass('flexy');
       $('#image_holder').toggleClass('grid');
+      $('#grid_svg').toggleClass('displaynone');
+      $('#box_svg').toggleClass('displaynone');
+    });
+
+
+    // $('img').click(function(){
+    //   console.log('image!');
+    //   if(grid_active){
+    //     console.log('grid!');
+    //     console.log($(this.parentElement));
+
+    //     $(this.parentElement).toggleClass('lightbox');
+    //   }
+    // });
+
+    //when u click an image
+    $('#barba-wrapper').on('click', 'img', function(e, delta) {
+      console.log('image!');
+      if(grid_active){
+        lightbox_active = !lightbox_active;
+        in_lightbox = this.parentElement.parentElement;
+        console.log('grid!');
+        console.log($(this.parentElement.parentElement));
+
+
+
+        $(this.parentElement).toggleClass('lightbox');
+      }
     });
 
 
@@ -212,13 +232,27 @@ $(function() {
             offset += limit;
             console.log(delay);
             update_scroll_width(delay);
-            
+
+            // $('img').click(function(){
+            //   console.log('image!');
+            //   if(grid_active){
+            //     console.log('grid!');
+            //     console.log($(this.parentElement));
+
+            //     $(this.parentElement).toggleClass('lightbox');
+            //   }
+            // });
+
         });
     };
 
+    //update-scroll-width
     function update_scroll_width(delay){
       setTimeout(function(){  //wait for a sec for the images to settle
         scroll_width = 80; //start with the padding
+
+        // checkwidth = element.offsetWidth;
+        console.log(element[0].offsetWidth);
 
         if(grid_active){
           //every 4 images
@@ -237,13 +271,50 @@ $(function() {
             }
             
           }
+          console.log('scroll_width: ' + scroll_width);
         }else{
           for (var i = 0; i < $('.image_container').length; i++) {
             scroll_width += $('.image_container')[i].offsetWidth;
           }
         }
+
+
         callable = true;
       }, delay);
+    }
+
+
+    //reload functions
+    function reload_functions(){
+
+
+      scroll_element = $('.project');
+      element = $('.images'); //reset variables to new elements that have loaded
+      offset = limit; //this resets the offset it grabs images from ajax
+      grid_active = false;
+      update_scroll_width();
+
+
+
+      scroll_element.scroll(function() { //this is what makes it work when you switch barbas
+        if (this.scrollLeft + (window.innerWidth*2) > scroll_width){
+          if(callable){ //if it hasn't been called for this scroll event yet
+            call_images(url_json);
+          }
+        }
+      });
+
+      // $('img').click(function(){
+      //   console.log('image!');
+      //   if(grid_active){
+      //     console.log('grid!');
+      //     console.log($(this.parentElement));
+
+      //     $(this.parentElement).toggleClass('lightbox');
+      //   }
+      // });
+
+
     }
 
 

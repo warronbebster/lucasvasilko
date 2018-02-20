@@ -15,6 +15,8 @@
         </div>
       <?php endif ?>
 
+
+
       <div class="images side_scroll" id="image_holder" data-page="<?= $page->url() ?>" data-limit="<?= $limit ?>">
         <!-- <div id="measure"> -->
           <?php foreach($images as $image): ?>

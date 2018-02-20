@@ -4,4 +4,4 @@
 		<figcaption><?= $image->caption()->html() ?></figcaption>
 	</figure>
 </div>
-<br>
+<!-- <br> -->
