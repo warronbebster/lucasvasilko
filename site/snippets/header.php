@@ -22,6 +22,10 @@
         <a href="<?= url() ?>" rel="home"><?= $site->title()->html() ?></a>
       </div>
 
+      <div class="menu_element" id="name_mobile">
+        <span><?= $site->title()->html() ?></span>
+      </div>
+
       <?php snippet('menu2') ?>
 
       <div class="menu_element" id="grid">

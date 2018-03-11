@@ -6,7 +6,11 @@ return function($site, $pages, $page) {
   // $count    = $projects->count();
 
   $images = $site->homePage()->images();
+
+
   //the above line is what needs to grab all the children images
+  // or, just put images that go on the home page in the "home" page folder...
+
   $count = $images->count();
 
   // check if the request is an Ajax request and if the limit and offset keys are set

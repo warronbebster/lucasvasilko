@@ -5,6 +5,7 @@ $(function() {
     var url_json = element.data('page') + '.json';
     var limit = parseInt(element.data('limit'));
     var offset = limit;
+    var more_images = true;
     var callable = true; //can I call the ajax?
     var on_mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent); 
     var small_screen = window.innerWidth < 640; 
@@ -22,13 +23,11 @@ $(function() {
     
     $(window).resize(function() {
         small_screen = window.innerWidth < 640; 
-        // $('img').css('height', '100%');
-        // console.log('resized!');
     });
 
     update_scroll_width(500);
-    console.log('elemnt withd start'+element.width());
-    console.log('scroll width start '+scroll_width);
+    console.log('elemnt withd start'+ element.width());
+    console.log('scroll width start '+ scroll_width);
 
 
     Barba.Pjax.start(); 
@@ -133,11 +132,13 @@ $(function() {
     scroll_element.scroll(function() { //gotta get this to work when you switch to a new one
       // console.log(element.width());
       // console.log($('.image_container'));
-      console.log(scroll_element.scrollLeft() + (window.innerWidth*1.5));
-            // console.log('element width ' + element.width());
-            console.log('scroll width ' + scroll_width);
+      // console.log('element width ' + element.width());
+
+      // console.log(scroll_element.scrollLeft() + (window.innerWidth*1.5));
+      // console.log('scroll width ' + scroll_width);
 
       if (this.scrollLeft + (window.innerWidth*2) > scroll_width){
+        console.log('reach call point!');
         //if you're close to the end of the scroll
         if(callable){ //if it hasn't been called for this scroll event yet
           call_images(url_json);
@@ -148,27 +149,36 @@ $(function() {
 
 
 
-    
+    $('#name_mobile').click(function(){ //when u click "lucas vasilko" on mobile
+      if(small_screen){ //if small screen
+        // event.preventDefault();
+        $('.header').toggleClass('header_open');
+      }
+    });
 
-    if(small_screen){ //if small screen
+    $('li a').click(function(event){ //makes menu disappear on mobile when you click a project
+      console.log('ssss');
+      if(small_screen){ //if small screen
+        $('.header').toggleClass('header_open');
+        console.log('link clicked!');
+      }
+    });
 
-    } else { //if big screen
-      $('#name').mouseenter(
-        function(){
-          if(!about_visible){
-            $('.header').toggleClass('header_open');
-            about_visible = true;
-          }
-          
-        });
-      $('.header').mouseleave(
-        function(){
-          if(about_visible){
-            $('.header').toggleClass('header_open');
-            about_visible = false;
-          }
-        });
-    }
+
+    $('#name').mouseenter(function(){ //makes menu appear when you hover over name
+        if(!about_visible && !small_screen){
+          $('.header').toggleClass('header_open');
+          about_visible = true;
+        }
+        
+    });
+
+    $('.header').mouseleave(function(){ //makes menu disappear when you leave the area
+        if(about_visible && !small_screen){
+          $('.header').toggleClass('header_open');
+          about_visible = false;
+        }
+    });
 
     $('#night_mode').click(function(){
         $('html').toggleClass('night_mode');
@@ -185,6 +195,12 @@ $(function() {
       $('#box_svg').toggleClass('displaynone');
     });
 
+    $('#load_more').click(function(){ //when u click the load more button
+      if (more_images){
+        call_images(url_json);
+      }
+    });
+
 
     // $('img').click(function(){
     //   console.log('image!');
@@ -196,16 +212,14 @@ $(function() {
     //   }
     // });
 
-    //when u click an image
+    //when u click an image 
     $('#barba-wrapper').on('click', 'img', function(e, delta) {
       console.log('image!');
-      if(grid_active){
+      if(grid_active){ //if the grid is on
         lightbox_active = !lightbox_active;
         in_lightbox = this.parentElement.parentElement;
         console.log('grid!');
         console.log($(this.parentElement.parentElement));
-
-
 
         $(this.parentElement).toggleClass('lightbox');
       }
@@ -218,32 +232,37 @@ $(function() {
     function call_images(jsonurl, delay = 500) {
         console.log(jsonurl);
         callable = false;
+        if(more_images){//if there are more images to load
+          $.get(jsonurl, { limit: limit, offset: offset }, function(data) {
 
-        $.get(jsonurl, { limit: limit, offset: offset }, function(data) {
+              if (data.more === false) { //if there aren't any more images to load, delete button
+                  // $('#load_more').hide();
+                  console.log('no more!');
+                  more_images = false;
+                  //some code here to update #load_more
+                  $('#load_more span').html("You've reached the end!");
+              }
 
-            if (data.more === false) { //if there aren't any more images to load, delete button
-                // load_element.hide();
-            }
+              element.children().last().before(data.html); //adds the pictures
 
-            element.children().last().after(data.html); //adds the pictures
+              console.log('offset: ' + offset);
+              console.log('limit ' + limit);
+              offset += limit;
+              console.log(delay);
+              update_scroll_width(delay);
 
-            console.log('offset: ' + offset);
-            console.log('limit ' + limit);
-            offset += limit;
-            console.log(delay);
-            update_scroll_width(delay);
+              // $('img').click(function(){
+              //   console.log('image!');
+              //   if(grid_active){
+              //     console.log('grid!');
+              //     console.log($(this.parentElement));
 
-            // $('img').click(function(){
-            //   console.log('image!');
-            //   if(grid_active){
-            //     console.log('grid!');
-            //     console.log($(this.parentElement));
+              //     $(this.parentElement).toggleClass('lightbox');
+              //   }
+              // });
 
-            //     $(this.parentElement).toggleClass('lightbox');
-            //   }
-            // });
-
-        });
+          });
+        }
     };
 
     //update-scroll-width
@@ -272,7 +291,7 @@ $(function() {
             
           }
           console.log('scroll_width: ' + scroll_width);
-        }else{
+        } else {
           for (var i = 0; i < $('.image_container').length; i++) {
             scroll_width += $('.image_container')[i].offsetWidth;
           }
@@ -292,12 +311,14 @@ $(function() {
       element = $('.images'); //reset variables to new elements that have loaded
       offset = limit; //this resets the offset it grabs images from ajax
       grid_active = false;
+      more_images = true;
       update_scroll_width();
 
 
 
       scroll_element.scroll(function() { //this is what makes it work when you switch barbas
         if (this.scrollLeft + (window.innerWidth*2) > scroll_width){
+          console.log('reach call point!');
           if(callable){ //if it hasn't been called for this scroll event yet
             call_images(url_json);
           }

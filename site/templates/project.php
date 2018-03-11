@@ -1,12 +1,9 @@
 <?php snippet('header') ?>
 
+
   <main class="main" role="main">
     
-
-
-    
     <div class="project" >
-
 
 
       <?php if (! $page->text()->empty()): ?>
@@ -22,16 +19,17 @@
           <?php foreach($images as $image): ?>
             <?php snippet('image', compact('image')) ?>
           <?php endforeach ?>
+
+          <div class="image_container side_scroll" id="load_more">
+            <span>Load some more images, please</span>
+          </div>
+
         <!-- </div> -->
       </div>
       
-      <!-- <button class="load_more side_scroll">Load more</button> -->
+
 
     </div>
-
-
-    
-    <!-- <?php snippet('prevnext') ?> -->
 
   </main>
 

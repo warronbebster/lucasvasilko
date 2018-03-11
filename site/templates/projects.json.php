@@ -1,14 +1,13 @@
-<!-- /site/templates/projects.json.php -->
 <?php
+
+header("Access-Control-Allow-Origin: *");
+header('Content-type: application/json; charset=utf-8');
 
 $html = '';
 
-foreach($projects as $project) {
+foreach($images as $image) {
 
-  // reuse the project snippet to create the HTML for each project
-  // we need to set the third parameter to true, to return the
-  // snippet content instead of echoing it
-  $html .= snippet('project', compact('project'), true);
+  $html .= snippet('image', compact('image'), true);
 
 }
 
