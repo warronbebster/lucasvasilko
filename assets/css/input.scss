@@ -140,6 +140,11 @@ html {
   #load_more{
     border: 2px solid $background-color;
   }
+
+  .lightbox{
+    background-color: rgba(0,0,0,.85);
+  }
+
 }
 
 body {

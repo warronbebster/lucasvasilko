@@ -82,6 +82,8 @@ html {
     -ms-filter: "FlipV"; }
   .night_mode #load_more {
     border: 2px solid #ffffff; }
+  .night_mode .lightbox {
+    background-color: rgba(0, 0, 0, 0.85); }
 
 body {
   /* space for sticky footer */ }
