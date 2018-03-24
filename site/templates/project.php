@@ -21,7 +21,7 @@
           <?php endforeach ?>
 
           <div class="image_container side_scroll" id="load_more">
-            <span>Load some more images, please</span>
+            <span>Load more images</span>
           </div>
 
         <!-- </div> -->

@@ -240,7 +240,7 @@ $(function() {
                   console.log('no more!');
                   more_images = false;
                   //some code here to update #load_more
-                  $('#load_more span').html("You've reached the end!");
+                  $('#load_more span').html("You've reached the end.");
               }
 
               element.children().last().before(data.html); //adds the pictures
