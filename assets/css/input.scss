@@ -381,24 +381,12 @@ body {
 }
 
 
-// br{
-//   display: none;
-// }
-
 .image_container{
 
   display: inline-block;
-
-  // -webkit-box-flex: 1;
-  // -moz-box-flex: 1;
-  // box-flex: 1;
-  // -webkit-flex: 1 1 auto;
-  // flex: 1 1 auto; 
   height:100%;
-
-
   font-size: 0;
-  padding-right: $gridunit*4;
+  padding-right: $gridunit*2;
   transition: height .7s cubic-bezier(0.40, 0.06, 0.19, 0.95), width .7s cubic-bezier(0.40, 0.06, 0.19, 0.95);
 
   figure{
