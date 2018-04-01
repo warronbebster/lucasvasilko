@@ -30,7 +30,7 @@
   <header class="header" role="banner">
 
       <div class="menu_element" id="name">
-        <a href="<?= url() ?>" rel="home"><?= $site->title()->html() ?></a>
+        <a rel="home"><?= $site->title()->html() ?></a>
       </div>
 
       <div class="menu_element" id="name_mobile">

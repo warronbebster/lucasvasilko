@@ -1,7 +1,12 @@
 @charset "UTF-8";
 
 
-
+@font-face {
+  font-family: 'Untitled Sans';
+  src: url('../fonts/UntitledSansWeb-Regular.eot'); /* IE9 Compat Modes */
+  src: url('../fonts/UntitledSansWeb-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('../fonts/UntitledSansWeb-Regular.woff') format('woff'), /* Pretty Modern Browsers */
+}
 
 /* =====  1 Global Rules & Definitions  ===================================== */
 
@@ -12,6 +17,8 @@ $hover-color: #AA9CAB;
 $focus-color: #000000;
 $font-size: 20px;
 $gridunit: 20px;
+
+
 
 @mixin box-shadow($horiz, $vert, $blur, $spread, $color) {
   -webkit-box-shadow: $horiz $vert $blur $spread $color;
@@ -256,9 +263,7 @@ body {
   padding-left: 0;
 }
 
-#mobile_link{
-    display: none;
-  }
+
 
 .menu-item {
   display: inline-block;
@@ -395,7 +400,7 @@ body {
 
   img{
       height: 100%;
-      max-width: 100%;
+      // max-width: 100%;
       width: auto;
   }
 

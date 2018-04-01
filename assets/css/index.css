@@ -1,4 +1,9 @@
 @charset "UTF-8";
+@font-face {
+  font-family: 'Untitled Sans';
+  src: url("../fonts/UntitledSansWeb-Regular.eot");
+  /* IE9 Compat Modes */
+  src: url("../fonts/UntitledSansWeb-Regular.woff2") format("woff2"), url("../fonts/UntitledSansWeb-Regular.woff") format("woff"); }
 /* =====  1 Global Rules & Definitions  ===================================== */
 /* -----  1.1 Font Definitions  --------------------------------------------- */
 /* -----  1.2 Reset & Normalization  ---------------------------------------- */
@@ -163,9 +168,6 @@ svg {
   display: none;
   padding-left: 0; }
 
-#mobile_link {
-  display: none; }
-
 .menu-item {
   display: inline-block;
   margin-right: 10px; }
@@ -259,7 +261,6 @@ svg {
     height: 100%; }
   .image_container img {
     height: 100%;
-    max-width: 100%;
     width: auto; }
   .image_container figcaption {
     position: absolute;
