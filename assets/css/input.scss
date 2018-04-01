@@ -461,7 +461,9 @@ body {
   // height: 100vh;
   display: grid;
   grid-gap: 0;
-  grid-template-columns: repeat( 300px);
+  // grid-template-columns: repeat( 300px);
+  // grid-template-columns: minmax(max-content, 300px);
+  grid-auto-columns: min-content;
   grid-template-rows: 25% 25% 25% 25%;
   grid-auto-flow: column;
   align-content: space-between;
@@ -476,8 +478,10 @@ body {
 
   .image_container{
     padding-right: $gridunit*4;
-    min-width: 30vh;
-    margin-right: $gridunit;
+    width: 35vh;
+    min-width:380px;
+
+    margin-right: $gridunit*2;
 
     // height: 25%; //pivoting this on or off might do the trick, and allow for animation...
     // margin-right: $gridunit;
@@ -502,7 +506,7 @@ body {
 
     figure{
       object-fit: contain;
-      background: transparent;
+      // background: transparent;
       img{
         margin: 0 auto;
         min-height: 100%;
@@ -539,7 +543,7 @@ body {
       }
       img{
         max-height: calc(100vh - 80px);
-        // max-width: calc(100vw - 80px);
+        max-width: 100vw;
         padding: $gridunit*4;
         &:hover{
           cursor: zoom-out;

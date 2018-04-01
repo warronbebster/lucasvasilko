@@ -290,7 +290,7 @@ svg {
 .grid {
   display: grid;
   grid-gap: 0;
-  grid-template-columns: repeat(300px);
+  grid-auto-columns: min-content;
   grid-template-rows: 25% 25% 25% 25%;
   grid-auto-flow: column;
   align-content: space-between;
@@ -299,8 +299,9 @@ svg {
     padding: 10px; }
   .grid .image_container {
     padding-right: 80px;
-    min-width: 30vh;
-    margin-right: 20px; }
+    width: 35vh;
+    min-width: 380px;
+    margin-right: 40px; }
     .grid .image_container:nth-of-type(4n+0) {
       padding-top: 10px; }
     .grid .image_container:nth-of-type(4n+1) {
@@ -312,8 +313,7 @@ svg {
       padding-bottom: 10px;
       padding-top: 10px; }
     .grid .image_container figure {
-      object-fit: contain;
-      background: transparent; }
+      object-fit: contain; }
       .grid .image_container figure img {
         margin: 0 auto;
         min-height: 100%;
@@ -337,6 +337,7 @@ svg {
         background-color: rgba(0, 0, 0, 0.85); }
       .grid .image_container .lightbox img {
         max-height: calc(100vh - 80px);
+        max-width: 100vw;
         padding: 80px; }
         .grid .image_container .lightbox img:hover {
           cursor: zoom-out; }

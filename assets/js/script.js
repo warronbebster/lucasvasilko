@@ -134,7 +134,7 @@ $(function() {
       // console.log($('.image_container'));
       // console.log('element width ' + element.width());
 
-      // console.log(scroll_element.scrollLeft() + (window.innerWidth*1.5));
+      // console.log(scroll_element.scrollLeft() + (window.innerWidth*2));
       // console.log('scroll width ' + scroll_width);
 
       if (this.scrollLeft + (window.innerWidth*2) > scroll_width){
@@ -145,8 +145,6 @@ $(function() {
         }
       }
     });
-
-
 
 
     $('#name_mobile').click(function(){ //when u click "lucas vasilko" on mobile
@@ -164,13 +162,11 @@ $(function() {
       }
     });
 
-
     $('#name').mouseenter(function(){ //makes menu appear when you hover over name
         if(!about_visible && !small_screen){
           $('.header').toggleClass('header_open');
           about_visible = true;
         }
-        
     });
 
     $('.header').mouseleave(function(){ //makes menu disappear when you leave the area
@@ -187,12 +183,15 @@ $(function() {
     });
     
     $('#grid').click(function(){
-      call_images(url_json, 1500);
-      grid_active = !grid_active;
-      // $('#image_holder').toggleClass('flexy');
       $('#image_holder').toggleClass('grid');
       $('#grid_svg').toggleClass('displaynone');
       $('#box_svg').toggleClass('displaynone');
+
+
+      call_images(url_json, 500);
+      grid_active = !grid_active;
+      // $('#image_holder').toggleClass('flexy');
+
     });
 
     $('#load_more').click(function(){ //when u click the load more button
@@ -201,25 +200,13 @@ $(function() {
       }
     });
 
-
-    // $('img').click(function(){
-    //   console.log('image!');
-    //   if(grid_active){
-    //     console.log('grid!');
-    //     console.log($(this.parentElement));
-
-    //     $(this.parentElement).toggleClass('lightbox');
-    //   }
-    // });
-
     //when u click an image 
     $('#barba-wrapper').on('click', 'img', function(e, delta) {
       console.log('image!');
       if(grid_active){ //if the grid is on
         lightbox_active = !lightbox_active;
         in_lightbox = this.parentElement.parentElement;
-        console.log('grid!');
-        console.log($(this.parentElement.parentElement));
+        // console.log($(this.parentElement.parentElement));
 
         $(this.parentElement).toggleClass('lightbox');
       }
@@ -243,23 +230,13 @@ $(function() {
                   $('#load_more span').html("You've reached the end.");
               }
 
-              element.children().last().before(data.html); //adds the pictures
+              element.children().last().before(data.html); //adds the pictures before the last element 
 
               console.log('offset: ' + offset);
               console.log('limit ' + limit);
               offset += limit;
-              console.log(delay);
+              // console.log(delay);
               update_scroll_width(delay);
-
-              // $('img').click(function(){
-              //   console.log('image!');
-              //   if(grid_active){
-              //     console.log('grid!');
-              //     console.log($(this.parentElement));
-
-              //     $(this.parentElement).toggleClass('lightbox');
-              //   }
-              // });
 
           });
         }
@@ -275,7 +252,11 @@ $(function() {
 
         if(grid_active){
           //every 4 images
+          console.log('re-calibrating scroll width for grid');
+          console.log($('.image_container'));
+
           var test = 0;
+
           for (var i = 0; i < $('.image_container').length; i++) {
             var test_this_width = $('.image_container')[i].offsetWidth;
 
@@ -290,7 +271,7 @@ $(function() {
             }
             
           }
-          console.log('scroll_width: ' + scroll_width);
+          console.log('scroll_width calibrated: ' + scroll_width);
         } else {
           for (var i = 0; i < $('.image_container').length; i++) {
             scroll_width += $('.image_container')[i].offsetWidth;
@@ -303,16 +284,22 @@ $(function() {
     }
 
 
-    //reload functions
+    //reload functions when new barba or page loads
     function reload_functions(){
 
 
       scroll_element = $('.project');
       element = $('.images'); //reset variables to new elements that have loaded
       offset = limit; //this resets the offset it grabs images from ajax
-      grid_active = false;
       more_images = true;
       update_scroll_width();
+
+      if(grid_active){
+        grid_active = false;
+        $('#image_holder').toggleClass('grid');
+        $('#grid_svg').toggleClass('displaynone');
+        $('#box_svg').toggleClass('displaynone');
+      }
 
 
 
