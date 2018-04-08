@@ -275,8 +275,6 @@ svg {
   text-align: center;
   opacity: .2;
   transition: all 0.7s cubic-bezier(0.4, 0.06, 0.19, 0.95); }
-  #load_more .night_mode {
-    border: 2px solid #ffffff; }
   #load_more span {
     vertical-align: middle;
     display: inline-block;
@@ -286,6 +284,8 @@ svg {
     display: inline-block;
     height: 100%;
     vertical-align: middle; }
+  #load_more:hover {
+    cursor: pointer; }
 
 .grid {
   display: grid;

@@ -2,7 +2,9 @@ $(function() {
 
     var element = $('.images');
     var scroll_element = $('.project');
+    var load_more = $('#load_more');
     var url_json = element.data('page') + '.json';
+
     var limit = parseInt(element.data('limit'));
     var offset = limit;
     var more_images = true;
@@ -22,10 +24,10 @@ $(function() {
     // variables for AJAX
     
     $(window).resize(function() {
-        small_screen = window.innerWidth < 640; 
+        small_screen = window.innerWidth < 640; //is the screen small?
     });
 
-    update_scroll_width(500);
+    update_scroll_width(500);//on page load, update scroll width
     console.log('elemnt withd start'+ element.width());
     console.log('scroll width start '+ scroll_width);
 
@@ -155,7 +157,6 @@ $(function() {
     });
 
     $('li a').click(function(event){ //makes menu disappear on mobile when you click a project
-      console.log('ssss');
       if(small_screen){ //if small screen
         $('.header').toggleClass('header_open');
         console.log('link clicked!');
@@ -194,7 +195,7 @@ $(function() {
 
     });
 
-    $('#load_more').click(function(){ //when u click the load more button
+    load_more.click(function(){ //when u click the load more button
       if (more_images){
         call_images(url_json);
       }
@@ -248,12 +249,11 @@ $(function() {
         scroll_width = 80; //start with the padding
 
         // checkwidth = element.offsetWidth;
-        console.log(element[0].offsetWidth);
 
         if(grid_active){
           //every 4 images
           console.log('re-calibrating scroll width for grid');
-          console.log($('.image_container'));
+          // console.log($('.image_container'));
 
           var test = 0;
 
@@ -271,12 +271,15 @@ $(function() {
             }
             
           }
-          console.log('scroll_width calibrated: ' + scroll_width);
+
         } else {
+          console.log('re-calibrating scroll width for scroll');
           for (var i = 0; i < $('.image_container').length; i++) {
             scroll_width += $('.image_container')[i].offsetWidth;
           }
         }
+        
+        console.log('scroll_width calculated: ' + scroll_width);
 
 
         callable = true;
@@ -286,19 +289,21 @@ $(function() {
 
     //reload functions when new barba or page loads
     function reload_functions(){
+      console.log('firing reload_functions');
 
 
       scroll_element = $('.project');
-      element = $('.images'); //reset variables to new elements that have loaded
+      element = $('.images');
+      load_more = $('#load_more') //reset variables to new elements that have loaded
       offset = limit; //this resets the offset it grabs images from ajax
       more_images = true;
       update_scroll_width();
 
       if(grid_active){
-        grid_active = false;
-        $('#image_holder').toggleClass('grid');
+        $('#image_holder').removeClass('grid');
         $('#grid_svg').toggleClass('displaynone');
         $('#box_svg').toggleClass('displaynone');
+        grid_active = false;
       }
 
 
