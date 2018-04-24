@@ -121,7 +121,6 @@ $(function() {
     if(!on_mobile){ //if it's a computer
       $('#barba-wrapper').on('mousewheel', '.project', function(e, delta) {
         if ( Math.abs(e.deltaY) > Math.abs(e.deltaX) ){ //if you're scrolling more vertically than horizontally
-          // console.log("deltaY: " + e.deltaY);
           this.scrollLeft -= (e.deltaY * 1);
           e.preventDefault(); //prevent normal scroll
         }
@@ -132,17 +131,11 @@ $(function() {
 
 
     scroll_element.scroll(function() { //gotta get this to work when you switch to a new one
-      // console.log(element.width());
-      // console.log($('.image_container'));
-      // console.log('element width ' + element.width());
-
-      // console.log(scroll_element.scrollLeft() + (window.innerWidth*2));
-      // console.log('scroll width ' + scroll_width);
 
       if (this.scrollLeft + (window.innerWidth*2) > scroll_width){
-        console.log('reach call point!');
         //if you're close to the end of the scroll
-        if(callable){ //if it hasn't been called for this scroll event yet
+        console.log('reach call point!');
+        if(callable){ //if call_images hasn't been called for this scroll event yet
           call_images(url_json);
         }
       }
@@ -278,7 +271,7 @@ $(function() {
             scroll_width += $('.image_container')[i].offsetWidth;
           }
         }
-        
+        a
         console.log('scroll_width calculated: ' + scroll_width);
 
 
@@ -317,15 +310,6 @@ $(function() {
         }
       });
 
-      // $('img').click(function(){
-      //   console.log('image!');
-      //   if(grid_active){
-      //     console.log('grid!');
-      //     console.log($(this.parentElement));
-
-      //     $(this.parentElement).toggleClass('lightbox');
-      //   }
-      // });
 
 
     }
