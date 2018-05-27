@@ -207,6 +207,47 @@ $(function() {
     });
 
 
+    //this bit shows the name of project on hover
+    $('img').hover(function(event) {
+      if (!on_mobile) {  //if not on mobile
+        if($(this).parent().has("figcaption").length) { //if this image has a caption
+
+          $(this).mousemove(function(event) {
+              var x = event.pageX; //mouse x
+              var y = event.pageY; //mouse y
+
+              $("#mouse_caption").css({
+                  // "position":"fixed",
+                  "opacity": "1",
+                  "left": x + 16,
+                  "top": y + 24
+              });
+              let caption = $(this).parent().find("figcaption").html();
+
+              $("#mouse_caption").html(caption);
+          });
+        }
+      } //end mobile iff
+    },
+    function() {
+      if (!on_mobile) {
+        $("#mouse_caption").css({
+            "opacity": "0"
+        });
+      } //end mobile if
+    });
+
+
+
+
+
+
+
+
+
+
+
+
 
     //NAMED FUNCTIONS
 
@@ -271,7 +312,7 @@ $(function() {
             scroll_width += $('.image_container')[i].offsetWidth;
           }
         }
-        a
+        // a
         console.log('scroll_width calculated: ' + scroll_width);
 
 
