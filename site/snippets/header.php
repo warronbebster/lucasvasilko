@@ -13,11 +13,24 @@
   </script>
 
 
+  <title><?= $site->title()->html() ?> | <?= $page->title()->html() ?></title>
+  <meta name="description" content="<?= $site->description()->html() ?>">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
 
-  <title><?= $site->title()->html() ?> | <?= $page->title()->html() ?></title>
-  <meta name="description" content="<?= $site->description()->html() ?>">
+  <meta property="og:title" content="Lucas Vasilko Takes Photos">
+  <meta property="og:description" content="<?= $site->social()->html() ?>">
+  <meta property="og:url" content="http://lucasvasilko.com">
+
+  <?php if($site->hasImages()): ?>
+    <meta property="og:image" content="<?= $site->image()->url() ?>">
+    <meta name="twitter:card" content="summary_large_image">
+  <?php endif ?>
+  
+  
+  
+
+
 
   <?= css('assets/css/index.css') ?>
 

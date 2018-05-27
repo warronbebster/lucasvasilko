@@ -16,3 +16,7 @@ fields:
   copyright:
     label: Copyright
     type:  textarea
+
+  social:
+    label: Social
+    type:  textarea
