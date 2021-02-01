@@ -19,7 +19,8 @@ RewriteEngine on
 # In some enviroments it's necessary to
 # set the RewriteBase to:
 #
-RewriteBase /
+# RewriteBase /
+# OK SO WHEN DOING LOCAL DEV U NEED TO COMMENT THE ABOVE
 
 # block text files in the content folder from being accessed directly
 RewriteRule ^content/(.*)\.(txt|md|mdown)$ index.php [L]

@@ -13,16 +13,13 @@
       <?php endif ?>
 
 
-
-      <div class="images side_scroll" id="image_holder" data-page="http://localhost:8888/projects" data-limit="<?= $limit ?>">
-        <!-- above here we're calling the "projects" json representation because the home one breaks on url requests -->
-        <!-- <div id="measure"> -->
+<!--  here we're calling the "projects" json representation because the home one breaks on url requests -->
+      <div class="images side_scroll" id="image_holder" data-page="<?= $page->url() ?>" data-limit="<?= $limit ?>">
           <?php foreach($images as $image): ?>
             <?php snippet('image', compact('image')) ?>
           <?php endforeach ?>
-        <!-- </div> -->
 
-          <div class="image_container side_scroll" id="load_more">
+          <div class="image_container side_scroll" id="load_more" accesskey="m">
             <span>Load some more images, please</span>
           </div>
 

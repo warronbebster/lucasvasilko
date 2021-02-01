@@ -3,7 +3,7 @@
 header("Access-Control-Allow-Origin: *");
 header('Content-type: application/json; charset=utf-8');
 
-$html = '';
+// $html = '';
 
 foreach($images as $image) {
 
@@ -12,8 +12,8 @@ foreach($images as $image) {
 }
 
 // add $html and $more to the $data array
-$data['html'] = $html;
-$data['more'] = $more;
+$json['html'] = $html;
+$json['more'] = $more;
 
 // JSON encode the $data array
-echo json_encode($data);
+echo json_encode($json);
